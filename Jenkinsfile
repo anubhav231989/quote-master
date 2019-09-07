@@ -1,11 +1,6 @@
 pipeline {
-    agent none 
+    agent any
     stages {
-        stage('Test') { 
-            steps {
-                echo 'Hello, Maven'
-            }
-        }
         stage("Linting"){
             steps{
                  sh "tidy -q -e *.html"   
