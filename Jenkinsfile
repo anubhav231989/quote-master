@@ -7,10 +7,10 @@ pipeline {
             }
             post {
                 success {
-                    slackSend color: "good", message: "${%date%}: Linting HTML Completed. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
+                    slackSend color: "good", message: "Linting HTML Completed. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                 }
                 failure {
-                    slackSend color: "danger", message: "${%date%}: Linting HTML Failed. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
+                    slackSend color: "danger", message: "Linting HTML Failed. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                 }
             }
         }
@@ -23,10 +23,10 @@ pipeline {
                 }
                 post {
                 success {
-                    slackSend color: "good", message: "${%date%}: Files Uploaded Successfully. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
+                    slackSend color: "good", message: "Files Uploaded Successfully. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                     }
                 failure {
-                    slackSend color: "danger", message: "${%date%}: Failed Uploading Files. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
+                    slackSend color: "danger", message: "Failed Uploading Files. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                     }
                 }
             }
