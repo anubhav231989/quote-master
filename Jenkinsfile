@@ -21,14 +21,14 @@ pipeline {
                     s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: "index.html", bucket: "anubhavsidhu.com")
 
                 }
-                post {
+            }
+            post {
                 success {
                     slackSend color: "good", message: "Files Uploaded Successfully. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                     }
                 failure {
                     slackSend color: "danger", message: "Failed Uploading Files. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                     }
-                }
             }
         }
     }
