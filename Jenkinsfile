@@ -8,7 +8,11 @@ pipeline {
         }
         stage('Upload to AWS') {
             steps {
-                echo 'Uploaded.'
+                withAWS(credentials:'s3.anubhavsidhu.com'){
+                    sh 'echo "Uploading content to anubhavsidhu.com"'
+                    s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: "index.html", bucket: "anubhavsidhu.com")
+
+                }
             }
         }
     }
