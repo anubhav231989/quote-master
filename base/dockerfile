@@ -1,0 +1,21 @@
+FROM ubuntu:trusty
+MAINTAINER anubhav sidhu <anubhav231989@gmail.com>
+
+# ignore ubuntu package manager warnings.
+ENV TERM=xterm-256color
+
+RUN apt-get update && \
+    apt-get install -y \
+    -o APT::Install-Recommends=false -o APT::Install-Suggests=false \
+    python python-virtualenv
+
+# create virtual env
+# upgrade pip inside the virtual env to latest version
+RUN virtualenv /app_env && \
+    . /app_env/bin/activate && \
+    pip install pip --upgrade
+
+# Add an entrypoint script to the docker container.
+ADD  scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT [ "entrypoint.sh" ]

@@ -1,0 +1,26 @@
+FROM anubhavsidhu/quotemaster-backend:latest
+MAINTAINER anubhav sidhu <anubhav231989@gmail.com>
+
+# ignore ubuntu package manager warnings.
+ENV TERM=xterm-256color
+
+RUN apt-get update && \
+    apt-get install -y python-dev
+
+RUN . /app_env/bin/activate && \
+    pip install wheel --upgrade
+
+ENV WHEELHOUSE=/wheelhouse PIP_WHEEL_DIR=/wheelhouse PIP_FIND_LINKS=/wheelhouse XDG_CACHE_HOME=/cache
+
+VOLUME ["/wheelhouse", "/reports", "/cache"]
+
+COPY scripts/tests.sh /usr/local/bin/tests.sh
+RUN chmod +x /usr/local/bin/tests.sh
+ENTRYPOINT [ "tests.sh" ]
+CMD ["python","manage.py","test","--noinput"]
+
+COPY src /application
+WORKDIR /application
+
+
+
