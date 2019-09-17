@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage("Linting"){
             steps{
+                slackSend color: "good", message: "Source Code Management started a new build. `${env.JOB_NAME}#${env.BUILD_NUMBER}`\n\n"
                  sh "tidy -q -e *.html"   
             }
             post {
